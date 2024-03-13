@@ -1,0 +1,23 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get('/api/data')
+      .then(res => setData(res.data))
+      .catch(err => console.log(err));
+  }, []);
+
+  return (
+    <div>
+      <h1>My Website</h1>
+      <ul>
+        {data.map(item => <li key={item.id}>{item.name}</li>)}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
